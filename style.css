@@ -1,0 +1,101 @@
+@font-face {
+	font-family: MPLUSRounded1c-Bold;
+	src: url(MPLUSRounded1c-Bold.ttf);
+}
+
+@font-face {
+	font-family: MPLUSRounded1c-ExtraBold;
+	src: url(MPLUSRounded1c-ExtraBold.ttf);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: MPLUSRounded1c-Bold, sans-serif;
+}
+html,
+body {
+	height: 100%;
+}
+
+.wrapper {
+	position: relative;
+	width: 100%;
+	min-height: 100%;
+	margin: 0 auto;
+}
+
+.content {
+	padding-bottom: 90px;
+}
+
+h1 {
+	padding: 40px 20px 30px;
+	text-align: center;
+	font-size: 28pt;
+	font-family: MPLUSRounded1c-ExtraBold;
+}
+
+p {
+	padding: 10px 20px;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	font-size: 16pt;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+.mainBlock {      
+	box-sizing: border-box;
+	padding: 60px;
+	border-radius: 20px 20px 20px;
+	width: 500px;
+	height: auto;
+	text-align:center;
+	margin: 0 auto;
+}
+
+.mainBlock * {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: 4px solid transparent;
+}
+
+.answer {
+	cursor: pointer;
+	font-size: 16pt;
+	text-transform: uppercase;
+	padding: 10px;
+	border-radius: 10px 10px 10px 10px;
+	margin: 0 auto;
+	width: 90%;
+}
+
+input {
+	cursor: pointer;
+	font-size: 16pt;
+	text-transform: uppercase;
+	padding: 10px;
+	border-radius: 10px 10px 10px 10px;
+	text-align: center;
+	width: 90%;
+}
+
+input:hover {
+	border: transparent;
+}
+
+button {
+	cursor: pointer;
+	font-size: 12pt;
+	text-transform: uppercase;
+	padding: 10px;
+	border-radius: 10px 10px 10px 10px;
+	text-align: center;
+	width: 50%;
+}
