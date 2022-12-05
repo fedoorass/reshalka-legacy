@@ -15,7 +15,7 @@
 
 .mainBlock {      
 	background-color: #7247D7;
-	border: 16px solid white;
+	box-shadow: 15px 70px 70px 15px #452b8380;
 }
 
 .answer {

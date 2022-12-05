@@ -1,23 +1,17 @@
-const mj = function (tex) {
-    return MathJax.tex2svg(tex, {em: 16, ex: 6, display: false});
-  }
-
-function solve(problem) {
-    let ansHtml = document.getElementById("answer")
-    let ans
-    console.log(problem.split("=").length - 1)
-    if ((problem.split("=").length - 1) != 0) {
-        ans = Algebrite.roots(problem).toString()
+let cvs=document.getElementById("cvs")
+let ctx = cvs.getContext("2d")
+function drawGraph(func) {
+    let funcr = func.split("=")[1].toLowerCase()
+    console.log(funcr)
+    let y, oldX = 0, oldY = 0
+    ctx.clearRect(0, 0, cvs.width, cvs.height);
+    for (let x = -200; x<200; x+=0.5) {
+        y = parseInt(Algebrite.simplify(funcr.replaceAll("x", "("+x+")")).toString())
+        ctx.beginPath();
+        ctx.moveTo(oldX, oldY);
+        ctx.lineTo(x+cvs.width/2, -y+cvs.height/2);
+        ctx.stroke();
+        oldX = x+cvs.width/2
+        oldY = -y+cvs.height/2
     }
-    else {
-        ans = Algebrite.simplify(problem).toString()
-    }
-    
-    console.log(ans)
-    console.log(typeof(ans))
-    let ansn = math.parse(ans)
-    MathJax.typesetClear();
-    ansHtml.innerHTML = '';
-    const latex = ansn ? ansn.toTex({'keep': 'keep', 'hide': 'hide'}) : ''
-    ansHtml.appendChild(mj(latex));
 }
