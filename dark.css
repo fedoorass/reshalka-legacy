@@ -3,7 +3,8 @@
 }
 
 .wrapper {
-	background-color: #8D6DD7;
+	background: rgb(141,109,215);
+	background: linear-gradient(0deg, rgba(141,109,215,1) 0%, rgba(104,68,191,1) 100%);
 }
 
 .footer {
@@ -14,6 +15,7 @@
 
 .mainBlock {      
 	background-color: #7247D7;
+	border: 16px solid white;
 }
 
 .answer {

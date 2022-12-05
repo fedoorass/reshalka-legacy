@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Решалка</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="dark.css">
+	<script src="algebrite.bundle-for-browser.js"></script>
+	<script src="math.js"></script>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	<script src="main.js"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+		<div class="content">
+			<h1>Построить график</h1>
+			<div class="mainBlock">
+				<input type=text id="ura"></input>
+				<p id="answer" class="answer">ㅤ</p>
+				<button class="solve"
+					onclick="solve(document.getElementById('ura').value)">Решить</button>
+		</div>
+		<div class="footer">
+			<p>Авторы: Егоров Фёдор, Шабунц Артём</p>
+		</div>
+	</div>
+</body>
+
+</html>
