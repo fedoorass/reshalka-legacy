@@ -15,6 +15,12 @@ function drawGraph(func) {
 
     for (let funcSimpThis of funcSimpArr) {
         let yOld = Algebrite.simplify(funcSimpThis.replaceAll("x", "(-100)")).toString()
+        if (yOld.indexOf("i") == -1) {
+            if (yOld[yOld.length - 1] == ".") {
+                yOld = yOld.slice(0, -4)
+            }
+        }
+        yOld = math.evaluate(yOld)
         for (let x = -100; x <= 100; x += 0.5) {
             let y = Algebrite.simplify(funcSimpThis.replaceAll("x", "(" + x + ")")).toString()
 
