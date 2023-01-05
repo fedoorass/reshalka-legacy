@@ -6,6 +6,7 @@
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="dark.css">
+	<script src="math.js"></script>
 	<script src="algebrite.bundle-for-browser.js"></script>
 </head>
 
@@ -17,14 +18,13 @@
 			<div class="mainBlock">
 				<input type=text id="ura"></input>
 				<canvas id="cvs"></canvas>
-				<button class="solve"
-					onclick="drawGraph(document.getElementById('ura').value)">Построить</button>
+				<button class="solve" onclick="drawGraph(document.getElementById('ura').value)">Построить</button>
+			</div>
+			<div class="footer">
+				<p>Авторы: Егоров Фёдор, Шабунц Артём</p>
+			</div>
 		</div>
-		<div class="footer">
-			<p>Авторы: Егоров Фёдор, Шабунц Артём</p>
-		</div>
-	</div>
-	<script src="mathGraphs.js"></script>
+		<script src="mathGraphs.js"></script>
 </body>
 
 </html>
