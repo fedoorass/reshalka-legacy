@@ -1,12 +1,18 @@
 let cvs = document.getElementById("cvs")
 let ctx = cvs.getContext("2d")
 
-let funcArr = []
+let graphScale = 64,
+    graphOffsetX = 0,
+    graphOffsetY = 0
+
 
 function drawGraph(func) {
     ctx.clearRect(0, 0, cvs.width, cvs.height)
 
-    drawAxes(cvs, ctx);
+    drawNumbers()
+    drawAxes(cvs, ctx)
+    drawGrid(cvs, ctx)
+    // drawNumbers(cvs, ctx)
 
     let funcSimp = Algebrite.roots(replaceFloatingPointWithFraction(func.toLowerCase()), "y").toString()
     funcSimp = funcSimp.replace("[", "").replace("]", "")
@@ -21,7 +27,7 @@ function drawGraph(func) {
             }
         }
         yOld = math.evaluate(yOld)
-        for (let x = -100; x <= 100; x += 0.5) {
+        for (let x = -512 / graphScale; x <= 512 / graphScale; x += 8 / graphScale) {
             let y = Algebrite.simplify(funcSimpThis.replaceAll("x", "(" + x + ")")).toString()
 
             if (y.indexOf("i") == -1) {
@@ -31,13 +37,31 @@ function drawGraph(func) {
                 y = math.evaluate(y)
 
                 ctx.beginPath();
-                ctx.moveTo(x - 0.5 + cvs.width / 2, -yOld + cvs.height / 2);
-                ctx.lineTo(x + cvs.width / 2, -y + cvs.height / 2);
+                ctx.moveTo(x * graphScale - 8 + (cvs.width / 2), (-yOld) * graphScale + (cvs.height / 2));
+                ctx.lineTo(x * graphScale + (cvs.width / 2), -y * graphScale + (cvs.height / 2));
                 ctx.lineWidth = 1;
                 ctx.stroke();
                 yOld = y
             }
         }
+    }
+}
+
+function drawGrid(canvas, context) {
+    context.lineWidth = 0.5;
+    context.strokeStyle = 'grey'
+    ctx.font = "12px serif";
+    for (let x = -512 / graphScale; x <= 512 / graphScale; x += 32 / graphScale) {
+        context.beginPath();
+        context.moveTo(x * graphScale + (cvs.width / 2), -canvas.height);
+        context.lineTo(x * graphScale + (cvs.width / 2), canvas.height);
+        context.stroke();
+    }
+    for (let y = -512 / graphScale; y <= 512 / graphScale; y += 32 / graphScale) {
+        context.beginPath();
+        context.moveTo(-canvas.width, (cvs.height / 2) - y * graphScale);
+        context.lineTo(canvas.width, (cvs.height / 2) - y * graphScale);
+        context.stroke();
     }
 }
 
@@ -54,6 +78,39 @@ function drawAxes(canvas, context) {
     context.moveTo(-canvas.width, canvas.height / 2);
     context.lineTo(canvas.width, canvas.height / 2);
     context.stroke();
+}
+
+function addOnWheel(elem, handler) {
+    if (elem.addEventListener) {
+        if ('onwheel' in document) {
+            elem.addEventListener("wheel", handler)
+        } else if ('onmousewheel' in document) {
+            elem.addEventListener("mousewheel", handler)
+        } else {
+            elem.addEventListener("MozMousePixelScroll", handler)
+        }
+    } else {
+        elem.attachEvent("onmousewheel", handler)
+    }
+}
+
+addOnWheel(cvs, function (e) {
+
+    var delta = e.deltaY || e.detail || e.wheelDelta
+    if (delta > 0) graphScale *= 0.5
+    else graphScale *= 2
+    drawGraph(document.getElementById('ura').value)
+    e.preventDefault()
+});
+
+function drawNumbers() {
+    ctx.font = "12px serif";
+    for (let x = -512 / graphScale; x <= 512 / graphScale; x += 1 / graphScale * 64) {
+        ctx.fillText(x, x * graphScale + (cvs.width / 2), cvs.height / 2);
+    }
+    for (let y = -512 / graphScale; y <= 512 / graphScale; y += 1 / graphScale * 64) {
+        ctx.fillText(y, cvs.width / 2, (cvs.height / 2) - y * graphScale);
+    }
 }
 
 function replaceFloatingPointWithFraction(expression) {
@@ -83,8 +140,6 @@ function replaceFloatingPointWithFraction(expression) {
 
         result = result.slice(0, numberStart) + `(${numerator}/${denominator})` + result.slice(numberEnd + 1);;
     }
-
-    console.log(result);
 
     return result;
 }
